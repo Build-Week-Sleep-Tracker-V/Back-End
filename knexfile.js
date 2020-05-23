@@ -22,7 +22,6 @@ module.exports = {
       filename: "./database/test.db3",
     },
     useNullAsDefault: true,
-    useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations",
     },
