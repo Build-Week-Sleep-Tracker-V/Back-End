@@ -2,8 +2,6 @@ const router = require("express").Router();
 
 const Entries = require("./entries-model");
 
-const { validateUserId } = require("./entries-middleware");
-
 const { isEntryValid } = require("./entries-service");
 
 // GET all entries
@@ -18,18 +16,22 @@ router.get("/", (req, res) => {
 });
 
 // GET up to 5 entries by user_id
-router.get("/:id/user", validateUserId, (req, res) => {
-  Entries.findByUserId(req.params.id)
+router.get("/:id/user", (req, res) => {
+  const { id } = req.params;
+  Entries.findByUserId(id)
     .then((entries) => {
-      console.log(entries);
-      res.status(200).json({ data: entries });
+      if (entries.length) {
+        res.status(200).json(entries);
+      } else {
+        res
+          .status(404)
+          .json({ message: `Could not find any posts from user ${id}` });
+      }
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({ error: err.message });
     });
 });
-
 // POST a new entry
 router.post("/", (req, res) => {
   const newEntry = req.body;

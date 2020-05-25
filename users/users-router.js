@@ -24,8 +24,16 @@ router.delete("/:id", (req, res) => {
   Users.remove(req.params.id)
     .then((deleted) => {
       if (deleted) {
-        res.status(200).json({
-          message: `Removed user with the id of ${req.params.id}`,
+        Users.removeAllEntriesByUserId(req.params.id).then((deleted) => {
+          if (deleted) {
+            res.status(200).json({
+              message: `Removed user with the id of ${req.params.id} and the ${deleted} entries associated with it.`,
+            });
+          } else {
+            res.status(200).json({
+              message: `Removed user with id of ${req.params.id} but there were no entries associated with it to delete.`,
+            });
+          }
         });
       } else {
         res

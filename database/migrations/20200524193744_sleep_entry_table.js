@@ -2,10 +2,10 @@ exports.up = function (knex) {
   return knex.schema.createTable("entries", function (entries) {
     entries.increments();
     entries.float("date").notNullable();
-    entries.float("time_slept").notNullable();
+    entries.float("timeSlept").notNullable();
     entries.integer("mood").unsigned().notNullable();
     entries
-      .integer("user_id")
+      .integer("userId")
       .unsigned()
       .notNullable()
       .references("users.id")

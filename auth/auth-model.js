@@ -7,6 +7,7 @@ module.exports = {
   findById,
   update,
   remove,
+  removeAllEntriesByUserId,
 };
 
 function find() {
@@ -46,4 +47,8 @@ function update(changes, id) {
 
 function remove(id) {
   return db("users").where({ id }).del();
+}
+
+function removeAllEntriesByUserId(userId) {
+  return db("entries").where({ userId }).del();
 }

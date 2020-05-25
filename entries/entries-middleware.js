@@ -5,9 +5,11 @@ module.exports = {
 };
 
 function validateUserId(req, res, next) {
+  console.log(req.params);
   const userId = req.params.id;
-  Entries.findBy(userId)
+  Entries.findByUserId(userId)
     .then((entries) => {
+      console.log(entries);
       req.entries = entries;
       next();
     })

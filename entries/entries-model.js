@@ -18,8 +18,8 @@ function findBy(filter) {
   return db("entries").where(filter).orderBy("id");
 }
 
-function findByUserId(user_id) {
-  return db("entries").where({ user_id }).orderBy("id", "desc").limit(5);
+function findByUserId(userId) {
+  return db("entries").where({ userId }).orderBy("id", "desc").limit(7);
 }
 
 function findById(id) {
