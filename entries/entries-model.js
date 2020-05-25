@@ -5,30 +5,30 @@ module.exports = {
   find,
   findBy,
   findById,
+  findByUserId,
   update,
   remove,
 };
 
 function find() {
-  return db("users")
-    .select("id", "firstName", "lastName", "email")
-    .orderBy("id");
+  return db("entries").orderBy("id");
 }
 
 function findBy(filter) {
-  return db("users").where(filter).orderBy("id");
+  return db("entries").where(filter).orderBy("id");
+}
+
+function findByUserId(user_id) {
+  return db("entries").where({ user_id }).orderBy("id", "desc").limit(5);
 }
 
 function findById(id) {
-  return db("users")
-    .where({ id })
-    .select("id", "firstName", "lastName", "email")
-    .first();
+  return db("entries").where({ id }).first();
 }
 
-async function add(user) {
+async function add(entry) {
   try {
-    const [id] = await db("users").insert(user, "id");
+    const [id] = await db("entries").insert(entry, "id");
     return findById(id);
   } catch (err) {
     throw err;
@@ -36,7 +36,7 @@ async function add(user) {
 }
 
 function update(changes, id) {
-  return db("users")
+  return db("entries")
     .where({ id })
     .update(changes)
     .then((id) => {
@@ -45,5 +45,5 @@ function update(changes, id) {
 }
 
 function remove(id) {
-  return db("users").where({ id }).del();
+  return db("entries").where({ id }).del();
 }
