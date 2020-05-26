@@ -1,5 +1,5 @@
 // Update with your config settings.
-const configVars = require("./config/vars");
+const { pgConnection } = require("./config/vars");
 
 module.exports = {
   development: {
@@ -32,7 +32,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: configVars.pgConnection,
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10,
