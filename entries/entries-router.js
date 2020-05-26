@@ -15,7 +15,25 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET up to 5 entries by user_id
+// GET entry based on id
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  Entries.findById(id)
+    .then((entry) => {
+      if (entry) {
+        res.status(200).json(entry);
+      } else {
+        res
+          .status(404)
+          .json({ message: `Could not find any entry with the id of ${id}` });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// GET up to 7 entries by user_id
 router.get("/:id/user", (req, res) => {
   const { id } = req.params;
   Entries.findByUserId(id)
