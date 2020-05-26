@@ -1,7 +1,7 @@
 # Back-End
 
--This is the Rest API for Build-Week-Sleep-Tracker-Vick
--It can be found at `https://my-sleep-tracker.herokuapp.com/`
+- This is the Rest API for Build-Week-Sleep-Tracker-Vick
+- It can be found at `https://my-sleep-tracker.herokuapp.com/`
 
 ## /api/auth
 
