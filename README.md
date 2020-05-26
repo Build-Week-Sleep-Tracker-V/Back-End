@@ -8,7 +8,7 @@
 These are the only two routes that do not require a token. You must register and then login and use the token to go to any other route.
 
 - **[POST]** to `/api/auth/register`: returns the newly created user. Pass in the following credentials as the `body` of the request: `{ firstName: 'Jane', lastName: 'Doe', email: 'janedoe@gmail.com', password: 'mypassword'}`
-- **[POST]** to `/api/auth/login`: returns a message, a Json Web Token (JWT) that is good for 1 day, and the userId. Pass in the following credentials as the `body` of the request: `{ firstName: 'Jane', lastName: 'Doe', password: 'mypassword' }`
+- **[POST]** to `/api/auth/login`: returns a message, a Json Web Token (JWT) that is good for 1 day, the user's email, and the user's id. Pass in the following credentials as the `body` of the request: `{ firstName: 'Jane', lastName: 'Doe', password: 'mypassword' }`
 
 ## /api/users
 

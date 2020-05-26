@@ -47,7 +47,12 @@ router.post("/login", (req, res) => {
 
           res
             .status(200)
-            .json({ message: "Successful login.", token, userId: user.id });
+            .json({
+              message: "Successful login.",
+              token,
+              userId: user.id,
+              email: user.email,
+            });
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
