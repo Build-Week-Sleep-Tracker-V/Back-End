@@ -25,6 +25,6 @@ These routes are for the creation and manipulation of sleep entries in the datab
 - **[GET]** to `/api/entries`: returns an array of objects containing each entries data.
 - **[GET]** to `/api/entries/:id`: returns the entry specified in the `id` passed as part of the URL.
 - **[GET]** to `/api/entries/:id/user`: returns 7 of the latest entries for the user specified in the `id` passed as part of the URL. They are returned as an array of objects.
-- **[POST]** to `/api/entries`: returns the newly created entry. Pass in the following data as the `body` of the request: `{ sleepStart: a string expressing the time user went to sleep, sleepEnd: a string expressing the time the user woke up, mood: a number from 1 to 4, userId: a number matching the user Id of the user creating the entry }`
+- **[POST]** to `/api/entries`: returns the newly created entry. Pass in the following data as the `body` of the request: `{ sleepStart: a string expressing the time user went to sleep, sleepEnd: a string expressing the time the user woke up, mood: a number, userId: a number matching the user Id of the user creating the entry }`
 - **[PUT]** to `/api/entries/:id`: updates the entry using the `id` passed as part of the URL. Send the entry object with the updated information as the `body` of the request.
 - **[DELETE]** to `/api/entries/:id`: removes the entry with the `id` specified in the URL. Returns a message `{ message: "Successfully removed entry 1" }` only the entry number is the `id` specified in the URL.
