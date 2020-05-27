@@ -3,17 +3,13 @@ const bcryptjs = require("bcryptjs");
 const router = require("express").Router();
 
 const Users = require("./auth-model");
-const {
-  isRegisterValid,
-  isLoginValid,
-  generateToken,
-} = require("./auth-service");
+const { isUserValid, generateToken } = require("./auth-service");
 const configVars = require("../config/vars");
 
 // Register a new user
 router.post("/register", (req, res) => {
   const credentials = req.body;
-  if (isRegisterValid(credentials)) {
+  if (isUserValid(credentials)) {
     // hash it up
     const hash = bcryptjs.hashSync(credentials.password, configVars.rounds);
     credentials.password = hash;
@@ -36,23 +32,20 @@ router.post("/register", (req, res) => {
 
 // Login as a user
 router.post("/login", (req, res) => {
-  const { firstName, lastName, password } = req.body;
-  if (isLoginValid(req.body)) {
-    Users.findBy({ firstName: firstName, lastName: lastName })
+  const { username, password } = req.body;
+  if (isUserValid(req.body)) {
+    Users.findBy({ username })
       .then(([user]) => {
         // compare the password to the hash stored in the db
         if (user && bcryptjs.compareSync(password, user.password)) {
           // produce (sign) and send the token
           const token = generateToken(user);
 
-          res
-            .status(200)
-            .json({
-              message: "Successful login.",
-              token,
-              userId: user.id,
-              email: user.email,
-            });
+          res.status(200).json({
+            message: "Successful login.",
+            token,
+            userId: user.id,
+          });
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
