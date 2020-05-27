@@ -45,14 +45,11 @@ router.post("/login", (req, res) => {
           // produce (sign) and send the token
           const token = generateToken(user);
 
-          res
-            .status(200)
-            .json({
-              message: "Successful login.",
-              token,
-              userId: user.id,
-              email: user.email,
-            });
+          res.status(200).json({
+            message: "Successful login.",
+            token,
+            userId: user.id,
+          });
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }

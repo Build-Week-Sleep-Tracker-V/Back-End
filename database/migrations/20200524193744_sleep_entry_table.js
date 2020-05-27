@@ -1,8 +1,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("entries", function (entries) {
     entries.increments();
-    entries.float("date").notNullable();
-    entries.float("timeSlept").notNullable();
+    entries.text("sleepStart", 128).notNullable();
+    entries.text("sleepEnd", 128).notNullable();
     entries.integer("mood").unsigned().notNullable();
     entries
       .integer("userId")

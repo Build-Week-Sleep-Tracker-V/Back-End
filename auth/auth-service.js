@@ -2,30 +2,14 @@ const jwt = require("jsonwebtoken");
 const configVars = require("../config/vars");
 
 module.exports = {
-  isRegisterValid,
-  isLoginValid,
+  isUserValid,
   generateToken,
 };
 
-function isRegisterValid(user) {
+function isUserValid(user) {
   return Boolean(
-    user.firstName &&
-      typeof user.firstName === "string" &&
-      user.lastName &&
-      typeof user.lastName === "string" &&
-      user.email &&
-      typeof user.email === "string" &&
-      user.password &&
-      typeof user.password === "string"
-  );
-}
-
-function isLoginValid(user) {
-  return Boolean(
-    user.firstName &&
-      typeof user.firstName === "string" &&
-      user.lastName &&
-      typeof user.lastName === "string" &&
+    user.username &&
+      typeof user.username === "string" &&
       user.password &&
       typeof user.password === "string"
   );
@@ -34,8 +18,7 @@ function isLoginValid(user) {
 function generateToken(user) {
   const payload = {
     subject: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
+    firstName: user.username,
   };
 
   const options = {
