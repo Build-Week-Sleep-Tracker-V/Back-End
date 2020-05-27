@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 const Users = require("../auth/auth-model");
 
-const { isRegisterValid } = require("../auth/auth-service");
+const { isUserValid } = require("../auth/auth-service");
 
 const configVars = require("../config/vars");
 
@@ -49,7 +49,7 @@ router.delete("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
-  if (isRegisterValid(changes)) {
+  if (isUserValid(changes)) {
     // hash it up
     const hash = bcryptjs.hashSync(changes.password, configVars.rounds);
     changes.password = hash;
@@ -59,9 +59,7 @@ router.put("/:id", (req, res) => {
         res.status(200).json({
           updatedUser: {
             id: id,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
+            username: req.body.username,
           },
         });
       })

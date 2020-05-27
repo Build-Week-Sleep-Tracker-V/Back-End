@@ -4,9 +4,9 @@ module.exports = {
 
 function isEntryValid(entry) {
   return Boolean(
-    entry.date &&
+    entry.sleepStart &&
       typeof entry.sleepStart === "string" &&
-      entry.timeSlept &&
+      entry.sleepEnd &&
       typeof entry.sleepEnd === "string" &&
       entry.mood &&
       typeof entry.mood === "number" &&
